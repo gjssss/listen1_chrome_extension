@@ -664,7 +664,8 @@ angular.module('listenone').controller('PlayController', [
               msg.data.currentPlaying.id,
               msg.data.currentPlaying.album_id,
               track.lyric_url,
-              track.tlyric_url
+              track.tlyric_url,
+              track.title
             ).success((res) => {
               const { lyric, tlyric } = res;
               if (!lyric) {

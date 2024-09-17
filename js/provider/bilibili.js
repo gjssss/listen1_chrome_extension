@@ -437,12 +437,18 @@ class bilibili {
     };
   }
 
-  static lyric() {
+  static lyric(_, title) {
     return {
       success: (fn) => {
-        fn({
-          lyric: '',
-        });
+        netease.search(`/search?keywords=${encodeURIComponent(title)}&curpage=1&type=0`).success((data) => {
+          if (data.result[0]) {
+            console.log(title, data);
+            const album_id = data.result[0].id
+            netease.lyric(`/lyric?track_id=${album_id}`).success((data) => {
+              fn(data)
+            })
+          }
+        })
       },
     };
   }
